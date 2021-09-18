@@ -20,7 +20,9 @@ clear_options - clears all previous options
 delete_options - deletes a specified option
 get_options - gets the current options specified as an array
 ```
-* Review the link below for available curl_setopt options available
+* Object cURL Options can be set with the class constructor to establish a starting point
+* Each HTTP Method (GET, POST, etc) will set the basic cURL options for class call convenience
+* Review the link below for available cURL options options available
 ```
 https://www.php.net/manual/en/function.curl-setopt.php
 ```
