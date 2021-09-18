@@ -12,6 +12,13 @@ type declarations
 
 ## CURL OPTS
 The cURL options rules apply to this package
+* curl options can be managed by the following methods:
+```
+	* add_option - adds a new option
+	* clear_options - clears all previous options
+	* delete_options - deletes a specified option
+	* get_options - gets the current options specified as an array
+```
 * Individual cURL options are not validated with this package
 * Review the link below for available curl_setopt options
 ```
