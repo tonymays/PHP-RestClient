@@ -15,17 +15,12 @@ type declarations
 * This package will throw only those errors that prevent a REST call from being made or response received
 
 ## cURL Options
-The cURL options rules apply to this package
-* Individual cURL options are not validated with this package
-* cURL options can be managed by the following methods:
+cURL options will be managed given the following:
+* Individual cURL options are not validated
+* Each HTTP Method (GET, POST, etc) will set appropriate cURL options
+&emsp;POST
 ```
-- Set the value of a specified option
-final public function set_option(string $option, string $value) : bool
-
 ```
-* The add_option(...) method will ignore a new option if the option has already been established
-* Object cURL options can be set with the class constructor to establish a starting point
-* Each HTTP Method (GET, POST, etc) will set the basic cURL options for class call convenience
 * Review the link below for available cURL options available for each REST call
 ```
 https://www.php.net/manual/en/function.curl-setopt.php
