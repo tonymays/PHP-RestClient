@@ -19,11 +19,9 @@ The cURL options rules apply to this package
 * Individual cURL options are not validated with this package
 * cURL options can be managed by the following methods:
 ```
-set_option - set a curl option value
-	* 	final public function set_option(string $option, string $value) : bool
-clear_options - clears all previous curl options
-delete_options - delete a specified curl option
-get_options - get the current options
+- Set the value of a specified option
+final public function set_option(string $option, string $value) : bool
+
 ```
 * The add_option(...) method will ignore a new option if the option has already been established
 * Object cURL options can be set with the class constructor to establish a starting point

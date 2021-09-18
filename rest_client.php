@@ -62,6 +62,7 @@ class RESTClient {
 	}
 
 
+
 	private function is_curl_enabled() :bool {
 		return (
 			function_exists('curl_init') &&
