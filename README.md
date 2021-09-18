@@ -18,7 +18,7 @@ type declarations
 cURL options will be managed given the following:
 * Individual cURL options are not validated
 * Each HTTP Method (GET, POST, etc) will set appropriate cURL options
-&emsp;POST
+&emsp;* POST
 ```
 ```
 * Review the link below for available cURL options available for each REST call
