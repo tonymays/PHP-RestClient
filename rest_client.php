@@ -42,7 +42,7 @@ class RESTClient {
 				curl_setopt_array($handle, $this->options);
 			}
 
-			// set the headers - this is how headers are established
+			// set the headers - this is how headers are established for each call
 			curl_setopt($handle, CURLOPT_HTTPHEADER, $this->transform_headers());
 
 			// setup the header callback method
@@ -145,7 +145,7 @@ class RESTClient {
 	// ---- delete_header ----
 	// removes a header from the internal headers array
 	// takes one paremeter: a string representing the header to the remove
-	// this method has not return type ... use get_headers() for assurances
+	// this method has no return type ... use get_headers() for assurances
 	final public function delete_header(string $header) : void {
 		$this->remove($this->headers, $header);
 	}
@@ -176,7 +176,7 @@ class RESTClient {
 	// ---- delete_option ----
 	// removes a option from the internal options array
 	// takes one paremeter: an int representing the option to the remove
-	// this method has not return type ... use get_options() for assurances
+	// this method has no return type ... use get_options() for assurances
 	final public function delete_option(int $option) : void {
 		$this->remove($this->options, $option);
 	}
