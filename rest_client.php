@@ -134,10 +134,25 @@ class RESTClient {
 		$this->set($this->headers, $header, $value);
 	}
 
+	// ---- clear_headers ----
+	// clears the internal headers array
+	// the method takes no parameters and has no return type
+	// use get_headers() for assurances
+	final public function clear_headers() : void {
+		$this->headers = [];
+	}
+
+	// ---- delete_header ----
+	// removes a header from the internal headers array
+	// takes one paremeter: a string representing the header to the remove
+	// this method has not return type ... use get_headers() for assurances
+	final public function delete_header(string $header) : void {
+		$this->remove($this->headers, $header);
+	}
+
 	// ---- get_headers ----
 	// get the current headers as an array
 	final public function get_headers() : array {
-		print_r($this->transform_headers());
 		return $this->headers;
 	}
 
@@ -148,6 +163,22 @@ class RESTClient {
 	// has no return value ... see get_headers to assurances
 	final public function set_option(int $option, $value) : void {
 		$this->set($this->options, $option, $value);
+	}
+
+	// ---- clear_options ----
+	// clears the internal options array
+	// the method takes no parameters and has no return type
+	// user get_options() for assurances
+	final public function clear_options() : array {
+		$this->options = [];
+	}
+
+	// ---- delete_option ----
+	// removes a option from the internal options array
+	// takes one paremeter: an int representing the option to the remove
+	// this method has not return type ... use get_options() for assurances
+	final public function delete_option(int $option) : void {
+		$this->remove($this->options, $option);
 	}
 
 	// ---- get_options ----
@@ -222,6 +253,20 @@ class RESTClient {
 		} else {
 			// add the element to the array in a way that preserves numerical keys
 			$array = $array + [$key => $value];
+		}
+	}
+
+	// ---- remove ----
+	// remove an element from an associative array
+	// takes two parameters: an array reference for the targetted array and a mixed item representing the key to remove
+	// does not have a return value
+	private function remove(array &$array, $item) : void {
+		if (count($array) > 0) {
+			foreach ($array as $key=>$value) {
+				if ($key == $item) {
+					unset($array[$key]);
+				}
+			}
 		}
 	}
 
