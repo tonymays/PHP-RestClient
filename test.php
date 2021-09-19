@@ -1,9 +1,11 @@
 <?php
 require_once('rest_client.php');
-$c = new RESTClient();
-$c->set_option('CURLOPT_CRLF', 'true');
-$c->set_option('CURLOPT_CRLF', 'false');
-$c->set_option('CURLOPT_CRLF', 'false');
-$c->set_option('CURLOPT_HAPROXYPROTOCOL', 'false');
-$c->set_option('CURLOPT_HAPROXYPROTOCOL', 'true');
+$headers = [
+	'Content-Type'=>'application/json',
+];
+$options = [
+	'CURLOPT_RETURNTRANSFER' => 'true',
+];
+$c = new RESTClient($headers, $options);
 print_r($c->get_options());
+print_r($c->get_headers());

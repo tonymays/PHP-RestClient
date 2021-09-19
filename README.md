@@ -9,19 +9,39 @@ This class is not backwards compatible to PHP 5 because it uses scalar and retur
 type declarations
 ```
 
-## Package Requirements
-* Each REST call is a separate call
-* Results from previous calls are your responsibility to manage to and including headers, bodies and options
-* This package will throw only those errors that prevent a REST call from being made or response received
-
-## cURL Options
-cURL options will be managed given the following:
-* Individual cURL options are not validated
-* Each HTTP Method (GET, POST, etc) will set appropriate cURL options
-* &emsp;POST
+* public function __construct(array $headers = [], array $curl_opts = [])
 ```
 ```
-* Review the link below for available cURL options available for each REST call
+* public function __destruct()
 ```
-https://www.php.net/manual/en/function.curl-setopt.php
+```
+* final public function set_header(string $option, string $value) : bool
+```
+```
+* final public function set_option(string $option, string $value) : bool
+```
+```
+* final public function delete_header(string $header) : bool
+```
+```
+* final public function delete_option(string $option) : bool
+```
+```
+* final public function clear_headers() : bool
+```
+```
+* final public function clear_options() : bool
+```
+```
+* final public function get_headers() : array
+```
+```
+* final public function get_options() : array
+```
+```
+* final public function set_headers(array $headers) : bool
+```
+```
+* final public function set_options(array $options) : bool
+```
 ```
