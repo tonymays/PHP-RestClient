@@ -45,6 +45,11 @@ Array
             [content-length] => 207
         )
     [response] => {"user_idid":"00cd2469-d597-48ac-a864-14aa80009127","username":"root","email":"anthony.d.mays@gmail.com","remote_addr":"192.241.151.58","service_catalog":["Can edit role","Can Edit User","Can Delete User"]}
-
 )
 ```
+
+The above code focuses on four things:
+* setting the call headers
+* establishing a post body
+* making the call
+* displaying the results of the call
