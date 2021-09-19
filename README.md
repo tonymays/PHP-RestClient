@@ -53,3 +53,73 @@ The above code focuses on four things:
 * establishing a post body
 * making the call
 * displaying the results of the call
+
+Notice in the output of the above call that there is a auth-token header returned.  The auth-token is a JWT token and needs to be set appropriately for future calls.
+
+So let's make the next call now that we have our JWT Token from the login attempt
+```
+$c->set_header('Auth-Token', $response['headers']['auth-token']);
+$response = $c->get("http://45.55.49.63:8080/users");
+print_r(json_decode($response['response'], true));
+```
+
+Below is the whole call code from login to getting users displayed
+```
+<?php
+require_once('rest_client.php');
+$c = new RESTClient();
+$c->set_header('Content-Type', 'application/json');
+$data = <<<DATA
+{
+	"username": "root",
+	"password": "abc123xyz890"
+}
+DATA;
+$response = $c->post("http://45.55.49.63:8080/auth", $data);
+$c->set_header('Auth-Token', $response['headers']['auth-token']);
+$response = $c->get("http://45.55.49.63:8080/users");
+print_r(json_decode($response['response'], true));
+```
+
+And outputs the following:
+```bash
+Array
+(
+    [0] => Array
+        (
+            [user_id] => 00cd2469-d597-48ac-a864-14aa80009127
+            [username] => root
+            [first_name] => Anthony
+            [last_name] => Mays
+            [address] => 3904 Long Meadow Court
+            [city] => Plano
+            [state] => Tx
+            [zip] => 75074
+            [country] => United States
+            [email] => anthony.d.mays@gmail.com
+            [phone] => 5613105635
+            [active] => Yes
+            [created] => 2021-09-15 19:58:01.597137168 +0000 UTC
+            [modified] => 2021-09-15 21
+        )
+
+    [1] => Array
+        (
+            [user_id] => 5d40a6f2-de58-43c6-9992-7fba3198ba16
+            [username] => root
+            [first_name] => Anthony
+            [last_name] => Mays
+            [address] => 3904 Long Meadow Court
+            [city] => Plano
+            [state] => TX
+            [zip] => 75074
+            [country] => United States
+            [email] => anthony.d.mays@yahoo.com
+            [phone] => 4697926095
+            [active] => Yes
+            [created] => 2021-09-15 21:18:14.868632889 +0000 UTC
+            [modified] => 2021-09-15 21:18:14.868632889 +0000 UTC
+        )
+
+)
+```

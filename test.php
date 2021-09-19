@@ -9,14 +9,13 @@ $data = <<<DATA
 }
 DATA;
 $response = $c->post("http://45.55.49.63:8080/auth", $data);
-print_r($response);
+$c->set_header('Auth-Token', $response['headers']['auth-token']);
+$response = $c->get("http://45.55.49.63:8080/users");
+print_r(json_decode($response['response'], true));
 
 
 /*
 // let's get some users now that we have logged in
-$c->set_header('Auth-Token', $response['headers']['auth-token']);
-$response = $c->get("http://45.55.49.63:8080/users");
-print_r(json_decode($response['response'], true));
 
 
 print_r($c->get_headers());
