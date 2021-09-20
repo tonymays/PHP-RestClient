@@ -5,9 +5,9 @@ RESTful client for PHP
 Built on PHP 7.4.23
 Zend Engine v3.4.0
 
-The simplest most powerful rest client for PHP
+Simply the easy most powerful REST API Client for PHP.
 
-This class is not backwards compatible to PHP 5 because it uses scalar and return type declarations
+This was written for PHP 7+ but can easily be forked for Version 5 Versions of PHP.
 ```
 ## Class Usage
 The fastest way to learn what is in a class is to see it in action
@@ -18,13 +18,8 @@ A sample of simplicity
 require_once('rest_client.php');
 $c = new RESTClient();
 $c->set_header('Content-Type', 'application/json');
-$data = <<<DATA
-{
-	"username": "root",
-	"password": "abc123xyz890"
-}
-DATA;
-$response = $c->post("http://45.55.49.63:8080/auth", $data);
+$data = <<<DATA{"username": "somebody","password": "somepassword"}DATA;
+$response = $c->post("http://127.0.0.0:8080/auth", $data);
 print_r($response);
 ```
 
@@ -39,12 +34,12 @@ Array
             [access-control-allow-methods] => HEAD,GET,DELETE,POST,PATCH,PUT
             [access-control-allow-origin] => *
             [access-control-expose-headers] => Content-Type, Auth-Token, API-Key
-            [auth-token] => eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFudGhvbnkuZC5tYXlzQGdtYWlsLmNvbSIsImV4cCI6MTYzMjA5Nzg0NSwicmVtb3RlX2FkZHIiOiIxOTIuMjQxLjE1MS41OCIsInVzZXJfaWQiOiIwMGNkMjQ2OS1kNTk3LTQ4YWMtYTg2NC0xNGFhODAwMDkxMjciLCJ1c2VybmFtZSI6InJvb3QifQ.SWNTQ0b5EwMCIhxCj55oCHG82L5bCwnH-E3g2xDxhpI
+            [auth-token] => efggbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFudGhvbnkuZC5tYXlzQGdtYWlsLmNvbSIsImV4cCI6MTYzMjA5Nzg0NSwicmVtb3RlX2FkZHIiOiIxOTIuMjQxLjE1MS41OCIsInVzZXJfaWQiOiIwMGNkMjQ2OS1kNTk3LTQ4YWMtYTg2NC0xNGFhODAwMDkxMjciLCJ1c2VybmFtZSI6InJvb3QifQ.SWNTQ0b5EwMCIhxCj55oCHG82L5bCwnH-E3g2xDxhpI
             [content-type] => application/json; charset=UTF-8
             [date] => Sun, 19 Sep 2021 23:30:45 GMT
             [content-length] => 207
         )
-    [response] => {"user_idid":"00cd2469-d597-48ac-a864-14aa80009127","username":"root","email":"anthony.d.mays@gmail.com","remote_addr":"192.241.151.58","service_catalog":["Can edit role","Can Edit User","Can Delete User"]}
+    [response] => {"user_idid":"11cd2469-d597-48ac-a864-14aa80009127","username":"somebody","email":"somebody@gmail.com","remote_addr":"127.0.0.0","service_catalog":["Can edit role","Can Edit User","Can Delete User"]}
 )
 ```
 
@@ -87,17 +82,17 @@ Array
 (
     [0] => Array
         (
-            [user_id] => 00cd2469-d597-48ac-a864-14aa80009127
-            [username] => root
-            [first_name] => Anthony
-            [last_name] => Mays
-            [address] => 3904 Long Meadow Court
-            [city] => Plano
-            [state] => Tx
-            [zip] => 75074
+            [user_id] => 11cd2469-d597-48ac-a864-14aa80009127
+            [username] => someuser
+            [first_name] => John
+            [last_name] => Doe
+            [address] => 123 ABC Ave
+            [city] => Bassett
+            [state] => NH
+            [zip] => 12345
             [country] => United States
-            [email] => anthony.d.mays@gmail.com
-            [phone] => 5613105635
+            [email] => somebody@gmail.com
+            [phone] => 1234567679
             [active] => Yes
             [created] => 2021-09-15 19:58:01.597137168 +0000 UTC
             [modified] => 2021-09-15 21
@@ -106,20 +101,105 @@ Array
     [1] => Array
         (
             [user_id] => 5d40a6f2-de58-43c6-9992-7fba3198ba16
-            [username] => root
-            [first_name] => Anthony
-            [last_name] => Mays
-            [address] => 3904 Long Meadow Court
-            [city] => Plano
-            [state] => TX
-            [zip] => 75074
+            [username] => someotheruser
+            [first_name] => Jane
+            [last_name] => Doe
+            [address] => 123 ABC Ave
+            [city] => Bassett
+            [state] => NH
+            [zip] => 12345
             [country] => United States
-            [email] => anthony.d.mays@yahoo.com
-            [phone] => 4697926095
+            [email] => somebodyelse@gmail.com
+            [phone] => 1234567665
             [active] => Yes
-            [created] => 2021-09-15 21:18:14.868632889 +0000 UTC
-            [modified] => 2021-09-15 21:18:14.868632889 +0000 UTC
+            [created] => 2021-09-15 19:58:01.597137168 +0000 UTC
+            [modified] => 2021-09-15 21
         )
 
 )
+```
+
+## Class Methods
+Below are the public and protected methods of this class.
+
+## Make that Call
+The following methods offer the ability to make RESTful calls
+
+POST
+* final public function post(string $url, string $body = '') : array
+* make a POST REST call
+* takes two parameters: a string that represents the url and a string representing the post body
+* returns a response array
+* establishes the following curl options as call defaults:
+```
+$this->set_option(CURLOPT_RETURNTRANSFER, 1);
+$this->set_option(CURLOPT_POST, 1);
+$this->set_option(CURLOPT_POSTFIELDS, $body);
+```
+
+PATCH
+* final public function patch(string $url, string $body = '') : array
+* make a PATCH REST call
+* takes two parameters: a string that represents the url and a string representing the patch body
+* returns a response array
+* establishes the following curl options as call defaults:
+```
+$this->set_option(CURLOPT_RETURNTRANSFER, 1);
+$this->set_option(CURLOPT_CUSTOMREQUEST, 'PATCH');
+$this->set_option(CURLOPT_POSTFIELDS, $body);
+```
+
+PUT
+* final public function put(string $url, string $body = '') : array
+* make a PUT REST call
+* takes two parameters: a string that represents the url and a string representing the put body
+* returns a response array
+* establishes the following curl options as call defaults:
+```
+$this->set_option(CURLOPT_RETURNTRANSFER, 1);
+$this->set_option(CURLOPT_CUSTOMREQUEST, 'PUT');
+$this->set_option(CURLOPT_POSTFIELDS, $body);
+```
+
+GET
+* final public function get(string $url) : array
+* make a GET REST call
+* takes one parameter: a string that represents the url
+* returns a response array
+* establishes the following curl options as call defaults:
+```
+$this->set_option(CURLOPT_RETURNTRANSFER, 1);
+```
+
+DELETE
+* final public function delete(string $url) : array
+* make a DEKETE REST call
+* takes one parameter: a string that represents the url
+* returns a response array
+* establishes the following curl options as call defaults:
+```
+$this->set_option(CURLOPT_RETURNTRANSFER, 1);
+$this->set_option(CURLOPT_CUSTOMREQUEST, 'DELETE');
+```
+
+HEAD
+* final public function head(string $url) : array
+* make a HEAD REST call
+* takes one parameter: a string that represents the url
+* returns a response array
+* establishes the following curl options as call defaults:
+```
+$this->set_option(CURLOPT_RETURNTRANSFER, 1);
+$this->set_option(CURLOPT_CUSTOMREQUEST, 'HEAD');
+```
+
+OPTIONS
+* final public function options(string $url) : array
+* make a OPTIONS REST call
+* takes one parameter: a string that represents the url
+* returns a response array
+* establishes the following curl options as call defaults:
+```
+$this->set_option(CURLOPT_RETURNTRANSFER, 1);
+$this->set_option(CURLOPT_CUSTOMREQUEST, 'OPTIONS');
 ```

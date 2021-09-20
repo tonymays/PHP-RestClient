@@ -3,10 +3,7 @@ require_once('rest_client.php');
 $c = new RESTClient();
 $c->set_header('Content-Type', 'application/json');
 $data = <<<DATA
-{
-	"username": "root",
-	"password": "abc123xyz890"
-}
+{"username": "root","password": "abc123xyz890"}
 DATA;
 $response = $c->post("http://45.55.49.63:8080/auth", $data);
 $c->set_header('Auth-Token', $response['headers']['auth-token']);
