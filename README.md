@@ -203,3 +203,47 @@ OPTIONS
 $this->set_option(CURLOPT_RETURNTRANSFER, 1);
 $this->set_option(CURLOPT_CUSTOMREQUEST, 'OPTIONS');
 ```
+
+## Manage Call Headers
+The following methods assist in managing call headers
+
+final public function set_header(string $header, string $value) : void
+* sets a header
+* takes two parameters: a string representing the header and a string representing the header value
+* has no return value ... see get_headers to assurances
+
+final public function clear_headers() : void
+* clears the internal headers array
+* the method takes no parameters and has no return type
+* use get_headers() for assurances
+
+final public function delete_header(string $header) : void
+* removes a header from the internal headers array
+* takes one parameter: a string representing the header to the remove
+* this method has no return type ... use get_headers() for assurances
+
+final public function get_headers() : array
+* get the current headers as an array
+
+
+## Manage Call cURL Options
+The following methods assist in manage call cURL options
+
+final public function set_option(int $option, $value) : void
+* sets a curl option
+* takes two parameters: an int representing the option and a mixed value representing the option value
+* NOTE: set true to 1 and false to 0
+* has no return value ... see get_headers to assurances
+
+final public function clear_options() : array
+* clears the internal options array
+* the method takes no parameters and has no return type
+* user get_options() for assurances
+
+final public function delete_option(int $option) : void
+* removes a option from the internal options array
+* takes one parameter: an int representing the option to the remove
+* this method has no return type ... use get_options() for assurances
+
+final public function get_options() : array
+* get the current curl options as an array
