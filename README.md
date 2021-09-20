@@ -54,7 +54,7 @@ Notice in the output of the above call that there is a auth-token header returne
 So let's make the next call now that we have our JWT Token from the login attempt
 ```
 $c->set_header('Auth-Token', $response['headers']['auth-token']);
-$response = $c->get("http://45.55.49.63:8080/users");
+$response = $c->get("http://127.0.0.1:8080/users");
 print_r(json_decode($response['response'], true));
 ```
 
@@ -70,9 +70,9 @@ $data = <<<DATA
 	"password": "abc123xyz890"
 }
 DATA;
-$response = $c->post("http://45.55.49.63:8080/auth", $data);
+$response = $c->post("http://127.0.0.1:8080/auth", $data);
 $c->set_header('Auth-Token', $response['headers']['auth-token']);
-$response = $c->get("http://45.55.49.63:8080/users");
+$response = $c->get("http://127.0.0.1:8080/users");
 print_r(json_decode($response['response'], true));
 ```
 
